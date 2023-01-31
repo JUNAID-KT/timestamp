@@ -46,18 +46,22 @@ function IsDateValid(date){
 }
 
 app.get("/api/:date", (req, res) => {
- // let dateString = req.params.date_string;
+
   let time = req.params.date;
+  if (!time) res.json({unix:new Date().valueOf(), utc: new Date().toUTCString()})
+
+  
   let msdate = new Date(Number(time));
   if (!IsDateValid(time)){
-    res.json({ error: "Invalid Date......." });
+    res.json({ error: "Invalid Date" });
   }
 
   if (!time.includes('-') && time.length >= 6) time = +time
-
+  
   if (msdate.toUTCString() === "Invalid Date") res.json({error: msdate.toUTCString()})
   else res.json({unix: msdate.valueOf(), utc: msdate.toUTCString()})
   
+   
   let dateObject = new Date(time);
  
   if (dateObject.toString() === "Invalid Date") {
