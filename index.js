@@ -58,18 +58,18 @@ app.get("/api/:date", (req, res) => {
 
   //if (!time.includes('-') && time.length >= 6) time = +time
   if (!time.includes('-') && time.length >= 5){
-    if (msdate.toUTCString() === "Invalid Date") res.json({error: "Invalid Date" })
-    if (time.length<13) res.json({unix: msdate.valueOf()})
-    else res.json({unix: msdate.valueOf(), utc: msdate.toUTCString()})
+    if (msdate.toUTCString() === "Invalid Date") res.json({error: "Invalid Date" });
+    if (time.length<13) res.json({unix: msdate.valueOf()});
+    else res.json({unix: msdate.valueOf(), utc: msdate.toUTCString()});
   }
   
  let dateObject = new Date(time);
  if (moment(date, 'Thu, 01 Jan 1970 00:00:00 GMT', true).isValid()){
    if (dateObject.toString() === "Invalid Date") res.json({ error: "Invalid Date" });
-   else res.json({utc: dateObject.toUTCString() });
+   else res.json({unix:dateObject.valueOf() ,utc: dateObject.toUTCString() });
  }
   
-  
+ res.json({unix:dateObject.valueOf() ,utc: dateObject.toUTCString() });
 });
 // listen for requests :)
 var listener = app.listen("8080", function () {
