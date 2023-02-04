@@ -58,8 +58,8 @@ app.get("/api/:date", (req, res) => {
 
   //if (!time.includes('-') && time.length >= 6) time = +time
   if (!time.includes('-') && time.length >= 6){
-    if (msdate.toUTCString() === "Invalid Date") res.json({error: msdate.toUTCString()})
-    if (time.length<13) res.json({unix: msdate*1000})
+    if (msdate.toUTCString() === "Invalid Date") res.json({error: "Invalid Date" })
+    if (time.length<13) res.json({unix: msdate.valueOf()})
     else res.json({unix: msdate.valueOf(), utc: msdate.toUTCString()})
   }
   
